@@ -3,34 +3,160 @@ using System.Collections.Generic;
 
 namespace Multifabriken
 {
-    class produkter
+    abstract class produkter
     {
+        public abstract void angeData();
 
+        public abstract void addToList();
+
+        public abstract void presentList();
     }
 
     class bilar : produkter
     {
-        public string regNr;
-        public string farg;
-        public string bilmarke;
+        private string regNr;
+        private string farg;
+        private string bilmarke;
+        private string strBilar;
+        public List<string> lsBilar = new List<string>();
+
+        public override void angeData()
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("Mata in data för önskad bil: ");
+            Console.Write("Skriv in registreringsnummer: ");
+            regNr = Console.ReadLine();
+            Console.Write("Skriv in färg: ");
+            farg = Console.ReadLine();
+            Console.Write("Skriv in bilmärke: ");
+            bilmarke = Console.ReadLine();
+
+            strBilar = $"Reg.Nr: {regNr}, Färg: {farg}, Bilmärke: {bilmarke}";
+        }
+
+        public override void addToList()
+        {
+            lsBilar.Add(strBilar);
+        }
+
+        public override void presentList()
+        {
+            int countBil = 0;
+            foreach (string bil in lsBilar)
+            {
+                countBil++;
+                Console.WriteLine("-Bil {0}: {1}", countBil, bil);
+            }
+        }
     }
 
     class godis : produkter
     {
-        public string smak;
-        public string antal;
+        private string smak;
+        private string antal;
+        private string strGodis;
+        public List<string> lsGodis = new List<string>();
+
+        public override void angeData()
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("Mata in data för önskad godis: ");
+            Console.Write("Skriv in smak: ");
+            smak = Console.ReadLine();
+            Console.Write("Skriv in antal: ");
+            antal = Console.ReadLine();
+                        
+            strGodis = $"Smak: {smak}, Antal: {antal}";
+        }
+
+        public override void addToList()
+        {
+            lsGodis.Add(strGodis);
+        }
+
+        public override void presentList()
+        {
+            int countGodis = 0;
+            foreach (string godis in lsGodis)
+            {
+                countGodis++;
+                Console.WriteLine("-Godis {0}: {1}", countGodis, godis);
+            }
+        }
     }
 
     class ror : produkter
     {
-        public string diameter;
-        public string langd;
+        private string diameter;
+        private string langd;
+        private string strRor;
+        public List<string> lsRor = new List<string>();
+
+        public override void angeData()
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("Mata in data för önskat rör: ");
+            Console.Write("Skriv in diameter: ");
+            diameter = Console.ReadLine();
+            Console.Write("Skriv in längd: ");
+            langd = Console.ReadLine();
+
+            strRor = $"Diameter: {diameter}, Längd: {langd}";
+        }
+
+        public override void addToList()
+        {
+            lsRor.Add(strRor);
+        }
+
+        public override void presentList()
+        {
+            int countRor = 0;
+            foreach (string ror in lsRor)
+            {
+                countRor++;
+                Console.WriteLine("-Rör {0}: {1}", countRor, ror);
+            }
+        }
     }
 
     class havremjolk : produkter
     {
-        public string fetthalt;
-        public string litermangd;
+        private string fetthalt;
+        private string litermangd;
+        private string strHavre;
+        public List<string> lsHavre = new List<string>();
+
+        public override void angeData()
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("Mata in data för önskad havremjölk: ");
+            Console.Write("Skriv in fetthalt: ");
+            fetthalt = Console.ReadLine();
+            Console.Write("Skriv in litermängd: ");
+            litermangd = Console.ReadLine();
+
+            strHavre = $"Fetthalt: {fetthalt}, Längd: {litermangd}";
+        }
+
+        public override void addToList()
+        {
+            lsHavre.Add(strHavre);
+        }
+
+        public override void presentList()
+        {
+            int countHavre = 0;
+            foreach (string havre in lsHavre)
+            {
+                countHavre++;
+                Console.WriteLine("-Havremjölk {0}: {1}", countHavre, havre);
+            }
+        }
     }
 
     class Program
@@ -38,10 +164,10 @@ namespace Multifabriken
         static void Main(string[] args)
         {
 
-            var lsBilar = new List<string>();
-            var lsGodis = new List<string>();
-            var lsRor = new List<string>();
-            var lsHavre = new List<string>();
+            bilar Bilar = new bilar();
+            godis Godis = new godis();
+            ror Ror = new ror();
+            havremjolk Havremjolk = new havremjolk();
 
             for ( ; ; )
             {
@@ -52,7 +178,6 @@ namespace Multifabriken
                 Console.WriteLine("[2] Godis ");
                 Console.WriteLine("[3] Rör ");
                 Console.WriteLine("[4] Havremjölk ");
-                Console.WriteLine();
                 Console.WriteLine("[5] Kundvagn ");
                 Console.WriteLine("[6] Avsluta ");
                 Console.WriteLine("Beställ produkt: val [1]-[4], se kundvagn: val [5] eller avsluta val [6]. ");
@@ -63,100 +188,36 @@ namespace Multifabriken
                 switch(val)
                 {
                     case "1":
-                        bilar Bilar = new bilar();
-
-                        Console.Clear();
-                        Console.WriteLine();
-                        Console.WriteLine("Mata in data för önskad bil: ");
-                        Console.Write("Skriv in registreringsnummer: ");
-                        Bilar.regNr = Console.ReadLine();
-                        Console.Write("Skriv in färg: ");
-                        Bilar.farg = Console.ReadLine();
-                        Console.Write("Skriv in bilmärke: ");
-                        Bilar.bilmarke = Console.ReadLine();
-
-                        string strBilar = $"Reg.Nr: {Bilar.regNr}, Färg: {Bilar.farg}, Bilmärke: {Bilar.bilmarke}";
-                        
-                        lsBilar.Add(strBilar);
+                        Bilar.angeData();
+                        Bilar.addToList();
                         break;
                     case "2":
-                        godis Godis = new godis();
-
-                        Console.Clear();
-                        Console.WriteLine();
-                        Console.WriteLine("Mata in data för önskad godis: ");
-                        Console.Write("Skriv in smak: ");
-                        Godis.smak = Console.ReadLine();
-                        Console.Write("Skriv in antal: ");
-                        Godis.antal = Console.ReadLine();
-                        
-                        string strGodis = $"Smak: {Godis.smak}, Antal: {Godis.antal}";
-
-                        lsGodis.Add(strGodis);
+                        Godis.angeData();
+                        Godis.addToList();
                         break;
                     case "3":
-                        ror Ror = new ror();
-
-                        Console.Clear();
-                        Console.WriteLine();
-                        Console.WriteLine("Mata in data för önskat rör: ");
-                        Console.Write("Skriv in diameter: ");
-                        Ror.diameter = Console.ReadLine();
-                        Console.Write("Skriv in längd: ");
-                        Ror.langd = Console.ReadLine();
-
-                        string strRor = $"Diameter: {Ror.diameter}, Längd: {Ror.langd}";
-
-                        lsRor.Add(strRor);
+                        Ror.angeData();
+                        Ror.addToList();
                         break;
                     case "4":
-                        havremjolk Havremjolk = new havremjolk();
-
-                        Console.Clear();
-                        Console.WriteLine();
-                        Console.WriteLine("Mata in data för önskad havremjölk: ");
-                        Console.Write("Skriv in fetthalt: ");
-                        Havremjolk.fetthalt = Console.ReadLine();
-                        Console.Write("Skriv in litermängd: ");
-                        Havremjolk.litermangd = Console.ReadLine();
-
-                        string strHavre = $"Fetthalt: {Havremjolk.fetthalt}, Längd: {Havremjolk.litermangd}";
-
-                        lsHavre.Add(strHavre);
+                        Havremjolk.angeData();
+                        Havremjolk.addToList();
                         break;
                     case "5":
                         Console.Clear();
                         Console.WriteLine();
-                        Console.WriteLine("Kundvagnen innehåller ({0} Bilar, {1} Godisar, {2} Rör, {3} Havremjölk): ", lsBilar.Count, lsGodis.Count, lsRor.Count, lsHavre.Count);
+                        Console.WriteLine("Kundvagnen innehåller ({0} Bilar, {1} Godisar, {2} Rör, {3} Havremjölk): ", Bilar.lsBilar.Count, Godis.lsGodis.Count, Ror.lsRor.Count, Havremjolk.lsHavre.Count);
                         Console.WriteLine();
 
-                        int countBil = 0;
-                        foreach (string bil in lsBilar)
-                        {
-                            countBil++;
-                            Console.WriteLine("-Bil {0}: {1}", countBil, bil);
-                        }
-                        int countGodis = 0;
-                        foreach (string godis in lsGodis)
-                        {
-                            countGodis++;
-                            Console.WriteLine("-Godis {0}: {1}", countGodis, godis);
-                        }
-                        int countRor = 0;
-                        foreach (string ror in lsRor)
-                        {
-                            countRor++;
-                            Console.WriteLine("-Rör {0}: {1}", countRor, ror);
-                        }
-                        int countHavre = 0;
-                        foreach (string havre in lsHavre)
-                        {
-                            countHavre++;
-                            Console.WriteLine("-Havremjölk {0}: {1}", countHavre, havre);
-                        }
-                        rtMeny:
+                        Bilar.presentList();
+                        Godis.presentList();
+                        Ror.presentList();
+                        Havremjolk.presentList();
+
                         Console.WriteLine();
-                        Console.Write("Tryck på [m] för att gå tillbaka till menyn. ");
+                        Console.WriteLine("[m] Meny");
+                        Console.Write("Välj [m] för att gå tillbaka till menyn. ");
+                        rtMeny:
                         string retToMeny = Console.ReadLine();
                         if (retToMeny == "m")
                         {
@@ -170,7 +231,7 @@ namespace Multifabriken
                     case "6":
                         Console.Clear();
                         Console.WriteLine();
-                        Console.WriteLine("Programmet avslutas... ");
+                        Console.WriteLine("Tack för handeln! Välkommen åter! Programmet avslutas... ");
                         return;
                     default:
                         Console.WriteLine();
