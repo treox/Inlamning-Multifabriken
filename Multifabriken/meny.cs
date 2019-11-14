@@ -19,8 +19,6 @@ namespace Multifabriken
             Console.WriteLine("[6] Avsluta ");
             Console.WriteLine("Beställ produkt: val [1]-[4], se kundvagn: val [5] eller avsluta val [6]. ");
             Console.WriteLine();
-
-            val = Console.ReadLine();
         }
     }
 }
