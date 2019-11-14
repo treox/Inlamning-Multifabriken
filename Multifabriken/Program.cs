@@ -7,6 +7,10 @@ namespace Multifabriken
     {
         static void Main(string[] args)
         {
+            
+            meny Meny = new meny();
+            avslut Avslut = new avslut();
+            standard Standard = new standard();
 
             bilar Bilar = new bilar();
             godis Godis = new godis();
@@ -15,21 +19,10 @@ namespace Multifabriken
 
             for ( ; ; )
             {
-                Console.Clear();
-                Console.WriteLine();
-                Console.WriteLine("Välkommen till Multifabriken AB! ");
-                Console.WriteLine("[1] Bilar ");
-                Console.WriteLine("[2] Godis ");
-                Console.WriteLine("[3] Rör ");
-                Console.WriteLine("[4] Havremjölk ");
-                Console.WriteLine("[5] Kundvagn ");
-                Console.WriteLine("[6] Avsluta ");
-                Console.WriteLine("Beställ produkt: val [1]-[4], se kundvagn: val [5] eller avsluta val [6]. ");
-                Console.WriteLine();
+                
+                Meny.presentMeny();
 
-                string val = Console.ReadLine();
-
-                switch(val)
+                switch(Meny.val)
                 {
                     case "1":
                         Bilar.angeData();
@@ -65,7 +58,6 @@ namespace Multifabriken
                         string retToMeny = Console.ReadLine();
                         if (retToMeny == "m")
                         {
-                            Console.WriteLine("Gåt tillbaka till menyn... ");
                             break;
                         }
                         else
@@ -73,13 +65,10 @@ namespace Multifabriken
                             goto rtMeny;
                         }
                     case "6":
-                        Console.Clear();
-                        Console.WriteLine();
-                        Console.WriteLine("Tack för handeln! Välkommen åter! Programmet avslutas... ");
+                        Avslut.avslutaProg();
                         return;
                     default:
-                        Console.WriteLine();
-                        Console.WriteLine("Gör ett val [1]-[6] i menyn: ");
+                        Standard.standardVal();
                         break;
                 }
             }
